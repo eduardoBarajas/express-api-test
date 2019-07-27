@@ -10,7 +10,6 @@ function request(req) {
         }).then(data => {
             alert(`Se elimino el cliente`);
             clearClientInfo();
-            initTransition('table');
             request('get');
         });
     }
@@ -40,6 +39,8 @@ function request(req) {
                 alert(errMsg);
             } else {
                 alert(`CVE_MENSAJE: ${data['_id']}`);
+                request('get');
+                clearClientInfo();
             }
         });
     }
