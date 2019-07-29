@@ -49,12 +49,14 @@ function request(req) {
         fetch('Api/NutriNet/Cliente').then(response => {
             return response.json();
         }).then(data => {
+            // se limpian los elementos anteriores que contenia la tabla.
             let index = 0;
             while (document.getElementById('table_row_' + index) !== null) {
                 document.getElementsByClassName('table')[0].removeChild(document.getElementById('table_row_' + index));
                 index++;
             }
             data.forEach(cliente => {
+                // se crean los elementos necesarios para agregar a la tabla.
                 let row = document.createElement('tbody');
                 let content = document.createElement('tr');
                 let nameCell = document.createElement('th');
@@ -98,6 +100,7 @@ function request(req) {
 }
 
 function addClient() {
+    // se muestran los botones debidos para el formulario de agregar.
     document.getElementById('btnActualizar').style.display = 'none';
     document.getElementById('btnEliminar').style.display = 'none';
     document.getElementById('btnGuardar').style.display = 'block';
@@ -113,6 +116,7 @@ function createCell(type, text) {
 }
 
 function updateClient(client) {
+    // se muestran los botones debidos para el formulario de modificar.
     document.getElementById('btnGuardar').style.display = 'none';
     document.getElementById('btnActualizar').style.display = 'block';
     document.getElementById('btnEliminar').style.display = 'block';

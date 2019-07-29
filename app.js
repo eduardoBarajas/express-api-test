@@ -23,11 +23,13 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// env file reader init
+// se carga el lector de archivos env.
 dotenv.config();
+// se construye el URI para la conexion a la db y se trata de conectar.
 var mongo_uri = `mongodb+srv://${process.env.DB_USER}:`+encodeURIComponent(process.env.DB_PASS)+process.env.DB;
 mongoose.connect(mongo_uri, {useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true});
 
+// se definen las rutas que tendra la api.
 app.use('/', routes);
 app.use('/Api/NutriNet', nutrinetRoutes);
 
@@ -62,8 +64,10 @@ app.use(function(err, req, res, next) {
     });
 });
 
+// se define el puerto que se utilizara para la conexion.
 const PORT = process.env.PORT || 8091;
 
+// se incia el servidor.
 app.listen(PORT, () => {
     console.log('Ejecutandose en el puerto '+PORT);
 });
